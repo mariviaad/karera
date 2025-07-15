@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class CounterWidget extends StatefulWidget {
   @override
   State<CounterWidget> createState() {
-    // TODO: implement createState
     return _CounterWidgetState();
   }
 }
