@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:karera/features/game/presentation/widgets/balance_widget.dart';
+import 'package:karera/core/theme/constants/colors_const.dart';
 import 'package:karera/features/game/presentation/widgets/bet_sliding_panel.dart';
 import 'package:karera/features/game/presentation/widgets/game_panel_controller.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -29,26 +29,52 @@ class _GamePageViewState extends State<GamePageView> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          Center(child: Text("Live Race Stream")),
-          SlidingUpPanel(
-            controller: _panelController,
-            minHeight: height - (width * 0.71),
-            maxHeight: height * 0.80,
-            color: Colors.transparent,
-            panelBuilder: (ScrollController sc) => Column(
+      backgroundColor: AppColors.black,
+      body: (width <= 1000)
+          ? SlidingUpPanel(
+              controller: _panelController,
+              minHeight: height - (width * 0.71),
+              maxHeight: height * 0.8,
+              color: Colors.transparent,
+              panelBuilder: (ScrollController sc) => Column(
+                children: [
+                  const GamePanelContent(),
+                  const SizedBox(height: 1),
+                  Expanded(child: BetSlidingPanel()),
+                ],
+              ),
+              body: const Center(
+                child: Text(
+                  "Live Race Stream",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const GamePanelContent(),
-                const SizedBox(height: 1),
-                BetSlidingPanel(),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      "Live Race Stream",
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: height),
+                        child: BetSlidingPanel(),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
