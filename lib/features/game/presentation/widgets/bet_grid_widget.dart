@@ -57,7 +57,7 @@ class _BettingGridState extends State<BettingGrid> {
                   height: 42,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(29, 41, 61, 1),
+                    color: Color(0xFF1D293D),
                     border: Border.all(color: Color(0xFF45556C)),
                   ),
                   margin: const EdgeInsets.all(1),

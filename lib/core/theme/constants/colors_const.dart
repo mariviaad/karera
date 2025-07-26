@@ -15,5 +15,5 @@ class AppColors {
   static const Color ballGreen = Color(0xFF00C951);
   static const Color ballYellow = Color(0xFFF0B100);
   static const Color ballViolet = Color(0xFFAD46FF);
-  static const Color ballOrange = Color.fromRGBO(255, 105, 0, 1);
+  static const Color ballOrange = Color(0xFFFF6900);
 }
