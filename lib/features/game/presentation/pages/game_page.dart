@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:karera/core/theme/constants/colors_const.dart';
+import 'package:karera/features/game/presentation/bloc/betting/betting_cubit.dart';
 import 'package:karera/features/game/presentation/widgets/bet_sliding_panel.dart';
 import 'package:karera/features/game/presentation/widgets/game_panel_controller.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class GamePage extends StatelessWidget {
-  final String name;
-  const GamePage({super.key, required this.name});
+  const GamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return BlocProvider<BettingCubit>(
+      create: (_) => BettingCubit(),
+      child: const GamePageView(),
+    );
   }
 }
 
@@ -38,13 +41,18 @@ class _GamePageViewState extends State<GamePageView> {
               minHeight: height - (width * 0.71),
               maxHeight: height * 0.8,
               color: Colors.transparent,
-              panelBuilder: (ScrollController sc) => Column(
-                children: [
-                  const GamePanelContent(),
-                  const SizedBox(height: 1),
-                  Expanded(child: BetSlidingPanel()),
-                ],
+              panelBuilder: (ScrollController sc) => Builder(
+                builder: (context) {
+                  return Column(
+                    children: [
+                      const GamePanelContent(),
+                      const SizedBox(height: 1),
+                      Expanded(child: BetSlidingPanel()),
+                    ],
+                  );
+                },
               ),
+
               body: const Center(
                 child: Text(
                   "Live Race Stream",

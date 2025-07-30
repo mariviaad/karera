@@ -11,7 +11,7 @@ class AppRouter {
     GoRoute(
       path: RouteLinks.game.path,
       name: RouteLinks.game.path,
-      builder: (context, state) => const GamePage(name: ''),
+      builder: (context, state) => const GamePage(),
     ),
   ];
 }

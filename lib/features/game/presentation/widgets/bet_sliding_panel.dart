@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:karera/core/theme/constants/colors_const.dart';
 import 'package:karera/features/game/presentation/widgets/balance_widget.dart';
-import 'package:karera/features/game/presentation/widgets/bet_amount.dart';
 import 'package:karera/features/game/presentation/widgets/bet_grid_widget.dart';
+import 'package:karera/features/game/presentation/widgets/betting_row.dart';
+import 'package:karera/features/game/presentation/widgets/history_menu.dart';
 
 class BetSlidingPanel extends StatefulWidget {
   const BetSlidingPanel({super.key});
@@ -13,6 +14,9 @@ class BetSlidingPanel extends StatefulWidget {
 
 class BetSlidingPanelState extends State<BetSlidingPanel> {
   final ScrollController _scrollController = ScrollController();
+  final GlobalKey<BettingGridState> _bettingGridKey =
+      GlobalKey<BettingGridState>();
+  final List<List<int>> _grid = List.generate(6, (_) => List.filled(6, 0));
 
   @override
   void dispose() {
@@ -31,14 +35,13 @@ class BetSlidingPanelState extends State<BetSlidingPanel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // ✅ BalanceWidget with padding
           Padding(
             padding: width <= 1000
                 ? EdgeInsets.symmetric(horizontal: width * 0.025, vertical: 14)
                 : EdgeInsets.all(16),
             child: const BalanceWidget(),
           ),
-          const SizedBox(height: 12.5),
+          const SizedBox(height: 8),
           Expanded(
             child: ScrollbarTheme(
               data: ScrollbarThemeData(
@@ -57,60 +60,37 @@ class BetSlidingPanelState extends State<BetSlidingPanel> {
                 scrollbarOrientation: ScrollbarOrientation.right,
                 child: SingleChildScrollView(
                   controller: _scrollController,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Center(
-                        child: Text(
-                          "Tap on a cell to bet (Min: ₱5)",
-                          style: TextStyle(
-                            color: const Color(0xCCFFFFFF),
-                            fontSize: 10.5,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 12.0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Center(
+                          child: Text(
+                            "Tap on a cell to bet (Min: ₱5)",
+                            style: TextStyle(
+                              color: const Color(0xCCFFFFFF),
+                              fontSize: 10.5,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 2),
-                      Center(
-                        child: BettingGrid(
-                          bettingGrid: List.generate(
-                            6,
-                            (_) => List.filled(6, 0),
+                        const SizedBox(height: 1),
+                        Center(
+                          child: BettingGrid(
+                            key: _bettingGridKey,
+                            bettingGrid: _grid,
                           ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const BetAmountWidget(),
-                          const SizedBox(width: 12),
-                          Column(
-                            children: [
-                              Text(
-                                "-BET",
-                                style: TextStyle(
-                                  color: AppColors.ballYellow,
-                                  fontSize: 10.5,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              Text(
-                                "-ODDS",
-                                style: TextStyle(
-                                  color: AppColors.ballRed,
-                                  fontSize: 10.5,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Placeholder(
-                            fallbackHeight: 50,
-                            fallbackWidth: 50,
-                            color: Colors.green,
-                          ),
-                        ],
-                      ),
-                    ],
+                        const SizedBox(height: 6),
+                        BettingRow(bettingGridKey: _bettingGridKey),
+                        const SizedBox(height: 50),
+                        const HistoryMenu(),
+                        const SizedBox(height: 30),
+                      ],
+                    ),
                   ),
                 ),
               ),
