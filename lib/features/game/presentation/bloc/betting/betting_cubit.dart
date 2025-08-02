@@ -15,4 +15,23 @@ class BettingCubit extends Cubit<BettingState> {
   void decrementBetAmount() {
     emit(state.copyWith(betAmount: state.betAmount - 1));
   }
+
+  void clearBets() {
+    final currentGrid = state.bettingGrid;
+
+    final hasBets = currentGrid.any((row) => row.any((cell) => cell > 0));
+
+    if (hasBets) {
+      final newHistory = List<List<List<int>>>.from(state.betHistory)
+        ..add(currentGrid.map((row) => List<int>.from(row)).toList());
+
+      emit(state.copyWith(bettingGrid: _initialGrid(), betHistory: newHistory));
+    } else {
+      emit(state.copyWith(bettingGrid: _initialGrid()));
+    }
+  }
+
+  List<List<int>> _initialGrid() {
+    return List.generate(6, (_) => List.filled(6, 0));
+  }
 }

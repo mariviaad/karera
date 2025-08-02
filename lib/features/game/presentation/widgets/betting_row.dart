@@ -44,11 +44,7 @@ class BettingRow extends StatelessWidget {
               ],
             ),
             const SizedBox(width: 12),
-            BetCountdown(
-              onCountdownFinish: () {
-                bettingGridKey.currentState?.clearBets();
-              },
-            ),
+            BetCountdown(onCountdownFinish: onCountdownFinish ?? () {}),
           ],
         ),
         const SizedBox(height: 8),

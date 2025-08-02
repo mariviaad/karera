@@ -9,7 +9,6 @@ class TableHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Split label: assume format like "1st Place"
     final parts = label.split(' ');
     final rank = parts.isNotEmpty ? parts[0] : '';
     final text = parts.length > 1 ? parts[1] : '';

@@ -41,7 +41,6 @@ class BetSlidingPanelState extends State<BetSlidingPanel> {
                 : EdgeInsets.all(16),
             child: const BalanceWidget(),
           ),
-          const SizedBox(height: 8),
           Expanded(
             child: ScrollbarTheme(
               data: ScrollbarThemeData(
@@ -85,10 +84,14 @@ class BetSlidingPanelState extends State<BetSlidingPanel> {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        BettingRow(bettingGridKey: _bettingGridKey),
-                        const SizedBox(height: 50),
-                        const HistoryMenu(),
+                        BettingRow(
+                          bettingGridKey: _bettingGridKey,
+                          onCountdownFinish: () {
+                            _bettingGridKey.currentState?.clearBets();
+                          },
+                        ),
                         const SizedBox(height: 30),
+                        const HistoryMenu(),
                       ],
                     ),
                   ),

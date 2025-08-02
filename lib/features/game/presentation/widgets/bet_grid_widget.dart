@@ -37,7 +37,7 @@ class BettingGridState extends State<BettingGrid> {
 
     setState(() {
       if (grid[row][col] == 0) {
-        grid[row][col] = 5;
+        grid[row][col] = betAmount < 5 ? 5 : betAmount;
       } else {
         grid[row][col] += betAmount;
       }

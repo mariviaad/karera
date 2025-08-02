@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class BetCountdown extends StatefulWidget {
   final VoidCallback onCountdownFinish;
   const BetCountdown({super.key, required this.onCountdownFinish});
+
   @override
   State<BetCountdown> createState() => _BetCountdownState();
 }
@@ -24,6 +25,7 @@ class _BetCountdownState extends State<BetCountdown> {
         if (secondsLeft > 0) {
           secondsLeft--;
         } else {
+          widget.onCountdownFinish();
           secondsLeft = 60;
         }
       });

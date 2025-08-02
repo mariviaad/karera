@@ -9,13 +9,18 @@ class BallLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = [
-      Colors.red,
-      Colors.blue,
-      Colors.green,
-      Colors.orange,
-      Colors.purple,
-      Colors.deepOrange,
+      AppColors.ballRed,
+      AppColors.ballBlue,
+      AppColors.ballGreen,
+      AppColors.ballYellow,
+      AppColors.ballViolet,
+      AppColors.ballOrange,
     ];
+
+    final ballColor = colors[(ballNumber - 1) % colors.length];
+    final textColor = ballColor == AppColors.ballYellow
+        ? AppColors.black
+        : AppColors.white;
 
     return Container(
       width: 56,
@@ -36,8 +41,8 @@ class BallLabel extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           "$ballNumber",
-          style: const TextStyle(
-            color: AppColors.white,
+          style: TextStyle(
+            color: textColor,
             fontSize: 12.25,
             fontWeight: FontWeight.bold,
           ),
