@@ -29,9 +29,9 @@ class YourBets extends StatelessWidget {
       margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(22, 32, 51, 1),
+        color: const Color(0xFF162033),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color.fromRGBO(69, 85, 108, 1)),
+        border: Border.all(color: AppColors.hoverGrey),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

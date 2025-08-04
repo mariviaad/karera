@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:karera/core/dependency_injection.dart';
 import 'package:karera/features/game/presentation/bloc/betting/betting_cubit.dart';
 import 'package:karera/features/game/presentation/pages/game_page.dart';
 
 void main() {
+  setUpDependencies();
   runApp(const MyApp());
 }
 
