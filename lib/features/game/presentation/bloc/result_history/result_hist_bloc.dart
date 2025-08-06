@@ -1,12 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:karera/features/game/data/models/result.dart';
-import 'package:karera/features/game/data/repositories/result_repositories.dart';
+import 'package:karera/features/game/data/repositories/result_repository.dart';
 
-part 'race_hist_state.dart';
-part 'race_hist_event.dart';
+part 'result_hist_state.dart';
+part 'result_hist_event.dart';
 
 class ResultHistoryBloc extends Bloc<ResultHistoryEvent, ResultHistoryState> {
-  final ResultRepositories resultsRepository;
+  final ResultRepository resultsRepository;
   ResultHistoryBloc(this.resultsRepository) : super(InitialResultHistory()) {
     on<FetchResultHistory>(_fetchBets);
   }

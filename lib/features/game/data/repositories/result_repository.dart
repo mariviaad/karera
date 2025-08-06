@@ -2,10 +2,10 @@ import 'package:karera/core/services/api_client.dart';
 import 'package:karera/features/game/data/models/result_RM.dart';
 import 'package:karera/utils/mocks.dart';
 
-class ResultRepositories {
+class ResultRepository {
   final DioClient _dioClient;
 
-  ResultRepositories(this._dioClient);
+  ResultRepository(this._dioClient);
   Future<ResultRm> fetchRaceHistory() async {
     try {
       final response = await _dioClient.get('/api/result/paged-list');

@@ -5,7 +5,7 @@ class Result extends Equatable {
   final ResultPlacing resultPlacing;
   final int status;
 
-  Result({
+  const Result({
     required this.raceNum,
     required this.status,
     required this.resultPlacing,
@@ -31,7 +31,7 @@ class ResultPlacing extends Equatable {
   final int fifth;
   final int sixth;
 
-  ResultPlacing({
+  const ResultPlacing({
     required this.first,
     required this.second,
     required this.third,

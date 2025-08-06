@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:karera/core/dependency_injection.dart';
 import 'package:karera/core/theme/constants/colors_const.dart';
-import 'package:karera/features/game/presentation/bloc/race_history/race_hist_bloc.dart';
+import 'package:karera/features/game/data/models/bet_item.dart';
+import 'package:karera/features/game/presentation/bloc/result_history/result_hist_bloc.dart';
+import 'package:karera/features/game/presentation/bloc/current_bets/current_bets_bloc.dart';
 import 'package:karera/features/game/presentation/widgets/race_history_table.dart';
-import 'package:karera/features/game/presentation/widgets/your_bets.dart';
+import 'package:karera/features/game/presentation/widgets/your_bets_widget.dart';
 
 class HistoryMenu extends StatefulWidget {
   const HistoryMenu({super.key});
@@ -18,9 +20,17 @@ class HistoryMenuState extends State<HistoryMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ResultHistoryBloc>(
-      create: (context) =>
-          locator<ResultHistoryBloc>()..add(FetchResultHistory()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ResultHistoryBloc>(
+          create: (context) =>
+              locator<ResultHistoryBloc>()..add(FetchResultHistory()),
+        ),
+        BlocProvider<CurrentBetsBloc>(
+          create: (context) =>
+              locator<CurrentBetsBloc>()..add(FetchCurrentBets()),
+        ),
+      ],
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -42,54 +52,55 @@ class HistoryMenuState extends State<HistoryMenu> {
           const SizedBox(height: 12),
 
           if (selectedIndex == 0)
-            RaceHistoryTable()
+            const RaceHistoryTable()
           else
-            YourBets(
-              raceNumber: 5,
-              isWin: true,
-              betGrid: [
-                [0, 20, 0, 0, 0, 0],
-                [0, 0, 0, 10, 0, 0],
-                [0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0],
-              ],
-              resultGrid: [
-                [false, true, false, false, false, false],
-                [false, false, false, true, false, false],
-                [false, false, false, false, false, false],
-                [false, false, false, false, false, false],
-                [false, false, false, false, false, false],
-                [false, false, false, false, false, false],
-              ],
-              totalBet: 30,
-              totalWin: 60,
-              totalLost: 0,
+            BlocBuilder<CurrentBetsBloc, CurrentBetsState>(
+              builder: (context, state) {
+                if (state is CurrentBetsLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is CurrentBetsLoaded) {
+                  final sortedItems = [...state.betItems]
+                    ..sort((a, b) => b.raceNum.compareTo(a.raceNum));
+                  final recentItems = sortedItems.take(5).toList();
+
+                  return Column(
+                    children: recentItems.map((betItem) {
+                      final netAmount = betItem.netAmount;
+
+                      final matchingStateItem = state.betItems.firstWhere(
+                        (item) => item.raceNum == betItem.raceNum,
+                        orElse: () => betItem,
+                      );
+
+                      return YourBets(
+                        raceNumber: matchingStateItem.raceNum,
+                        isWin: netAmount > 0,
+                        totalBet: matchingStateItem.totalBetAmount,
+                        totalWin: netAmount > 0 ? netAmount : 0,
+                        totalLost: netAmount < 0 ? netAmount : 0,
+                        betGrid: buildBetGridFromItem(matchingStateItem),
+                        resultGrid: buildResultGridFromItem(matchingStateItem),
+                        betItems: state.betItems,
+                      );
+                    }).toList(),
+                  );
+                } else {
+                  return const Center(child: Text("No bets found."));
+                }
+              },
             ),
+
           const SizedBox(height: 10),
-          if (selectedIndex == 0)
-            Center(
-              child: Text(
-                'Last 10 races showing final positions • Latest race highlighted',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Color(0xFF90A1B9),
-                  fontSize: 10.5,
-                ),
-              ),
-            )
-          else
-            Center(
-              child: Text(
-                'Your betting history • Yellow numbers = Your bets • Gold cells = Race results',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Color(0xFF90A1B9),
-                  fontSize: 10.5,
-                ),
-              ),
+
+          Center(
+            child: Text(
+              selectedIndex == 0
+                  ? 'Last 10 races showing final positions • Latest race highlighted'
+                  : 'Your betting history • Yellow numbers = Your bets • Gold cells = Race results',
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Color(0xFF90A1B9), fontSize: 10.5),
             ),
+          ),
         ],
       ),
     );
@@ -123,5 +134,27 @@ class HistoryMenuState extends State<HistoryMenu> {
         ),
       ),
     );
+  }
+
+  List<List<int?>> buildBetGridFromItem(BetItem item) {
+    List<List<int?>> grid = List.generate(6, (_) => List.filled(6, null));
+    for (var entry in item.betAmount.placedBets.entries) {
+      final number = entry.key - 1;
+      final row = number ~/ 6;
+      final col = number % 6;
+      grid[row][col] = entry.value;
+    }
+    return grid;
+  }
+
+  List<List<bool>> buildResultGridFromItem(BetItem item) {
+    List<List<bool>> grid = List.generate(6, (_) => List.filled(6, false));
+    for (var number in item.resultPlacing.resultNumbers) {
+      final index = number - 1;
+      final row = index ~/ 6;
+      final col = index % 6;
+      grid[row][col] = true;
+    }
+    return grid;
   }
 }
