@@ -40,9 +40,24 @@ class _BetCountdownState extends State<BetCountdown> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    double shapeWidth;
+    double shapeHeight;
+    double secondsFontSize;
+
+    if (screenWidth < 400) {
+      shapeWidth = 38;
+      shapeHeight = 38;
+      secondsFontSize = 14.5;
+    } else {
+      shapeWidth = 42;
+      shapeHeight = 42;
+      secondsFontSize = 18;
+    }
+
     return Container(
-      width: 42,
-      height: 42,
+      width: shapeWidth,
+      height: shapeHeight,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: const Color.fromRGBO(231, 0, 11, 1),
@@ -54,8 +69,8 @@ class _BetCountdownState extends State<BetCountdown> {
       child: Center(
         child: Text(
           "$secondsLeft",
-          style: const TextStyle(
-            fontSize: 18,
+          style: TextStyle(
+            fontSize: secondsFontSize,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),

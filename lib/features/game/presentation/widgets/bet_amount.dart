@@ -28,12 +28,42 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
     return BlocBuilder<BettingCubit, BettingState>(
       builder: (context, state) {
         final denomination = state.betAmount;
+        final screenWidth = MediaQuery.of(context).size.width;
+
+        // Responsive values based on screen width
+        double containerHeight;
+        double containerWidth;
+        double tapWidth;
+        double iconSize;
+        double tapFontSize;
+        double amountFontSize;
+        double amountWidth;
+
+        if (screenWidth <= 450) {
+          // Small screen
+          containerHeight = 36;
+          containerWidth = 160;
+          tapWidth = 58;
+          iconSize = 10;
+          tapFontSize = 10;
+          amountFontSize = 11;
+          amountWidth = 42;
+        } else {
+          // Large screen
+          containerHeight = 48;
+          containerWidth = 210;
+          tapWidth = 70;
+          iconSize = 12;
+          tapFontSize = 12;
+          amountFontSize = 14;
+          amountWidth = 72;
+        }
 
         return Container(
-          height: 40.5,
-          width: 185.2,
+          height: containerHeight,
+          width: containerWidth,
           decoration: BoxDecoration(
-            color: const Color.fromRGBO(30, 41, 57, .50),
+            color: const Color(0x801E2939),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color(0xFF4A5565)),
           ),
@@ -42,8 +72,8 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                width: 60,
-                height: 40.5,
+                width: tapWidth,
+                height: containerHeight,
                 decoration: BoxDecoration(
                   color: const Color(0xFF364153),
                   borderRadius: const BorderRadius.only(
@@ -51,21 +81,21 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
                     bottomLeft: Radius.circular(10),
                   ),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
                     Icon(
                       LucideIcons.settings,
                       color: Colors.white,
-                      size: 10.5,
+                      size: iconSize,
                       weight: 4,
                     ),
-                    SizedBox(width: 6),
+                    const SizedBox(width: 6),
                     Text(
                       'Tap',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 10.5,
+                        fontSize: tapFontSize,
                       ),
                     ),
                   ],
@@ -73,7 +103,8 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
               ),
               _buildButton("−", onTap: decrement),
               Container(
-                width: 64,
+                width: amountWidth,
+                height: containerHeight,
                 decoration: BoxDecoration(
                   border: const Border.symmetric(
                     vertical: BorderSide(width: 1, color: Color(0xFF4A5565)),
@@ -83,9 +114,9 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
                 alignment: Alignment.center,
                 child: Text(
                   '$denomination',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.amber,
-                    fontSize: 12.5,
+                    fontSize: amountFontSize,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -102,7 +133,7 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
     return TextButton(
       onPressed: onTap,
       style: TextButton.styleFrom(
-        minimumSize: const Size(35, 40.5),
+        minimumSize: const Size(24, 40.5),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         foregroundColor: Colors.white,

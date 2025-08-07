@@ -55,12 +55,18 @@ class StatusText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = 12.25;
-    if (screenWidth < 1000) {
-      fontSize = 10.5;
+    double statusFontSize;
+    if (screenWidth <= 480) {
+      statusFontSize = 8.5;
+    } else if (screenWidth < 1000) {
+      statusFontSize = 10.5;
+    } else {
+      statusFontSize = 12.25;
     }
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: screenWidth <= 480
+          ? EdgeInsets.symmetric(vertical: 2, horizontal: 4)
+          : EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
         color: const Color(0x1805DF72),
         borderRadius: BorderRadius.circular(6),
@@ -69,7 +75,7 @@ class StatusText extends StatelessWidget {
         "Latest",
         style: TextStyle(
           color: AppColors.textGreen,
-          fontSize: fontSize,
+          fontSize: statusFontSize,
           fontWeight: FontWeight.bold,
         ),
       ),

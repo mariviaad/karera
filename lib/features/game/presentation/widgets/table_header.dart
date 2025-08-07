@@ -9,13 +9,38 @@ class TableHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Responsive sizing
+    double containerWidth;
+    double containerHeight;
+    double fontSizeRank;
+    double fontSizeText;
+
+    if (screenWidth <= 450) {
+      containerWidth = 40;
+      containerHeight = 34;
+      fontSizeRank = 10.5;
+      fontSizeText = 9.5;
+    } else if (screenWidth <= 650) {
+      containerWidth = 56;
+      containerHeight = 42;
+      fontSizeRank = 10.5;
+      fontSizeText = 10.5;
+    } else {
+      containerWidth = 70;
+      containerHeight = 48;
+      fontSizeRank = 13;
+      fontSizeText = 12;
+    }
+
     final parts = label.split(' ');
     final rank = parts.isNotEmpty ? parts[0] : '';
     final text = parts.length > 1 ? parts[1] : '';
 
     return Container(
-      width: 56,
-      height: 42,
+      width: containerWidth,
+      height: containerHeight,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: Color(0xFF314158),
@@ -27,16 +52,16 @@ class TableHeader extends StatelessWidget {
         children: [
           Text(
             rank,
-            style: const TextStyle(
-              fontSize: 10.5,
+            style: TextStyle(
+              fontSize: fontSizeRank,
               fontWeight: FontWeight.w700,
               color: AppColors.white,
             ),
           ),
           Text(
             text,
-            style: const TextStyle(
-              fontSize: 10.5,
+            style: TextStyle(
+              fontSize: fontSizeText,
               fontWeight: FontWeight.w300,
               color: AppColors.white,
             ),

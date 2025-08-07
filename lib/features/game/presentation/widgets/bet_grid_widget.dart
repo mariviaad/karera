@@ -68,7 +68,26 @@ class BettingGridState extends State<BettingGrid> {
     final int rows = 6;
     final int cols = 6;
     final screenWidth = MediaQuery.of(context).size.width;
-    final cellSize = (screenWidth - 100) / (cols + 1);
+
+    double cornerWidth;
+    double cornerHeight;
+    double cornerFontSize;
+
+    if (screenWidth <= 450) {
+      cornerWidth = 40;
+      cornerHeight = 34;
+      cornerFontSize = 9.5;
+    } else if (screenWidth <= 650) {
+      cornerWidth = 56;
+      cornerHeight = 42;
+      cornerFontSize = 10.5;
+    } else {
+      cornerWidth = 70;
+      cornerHeight = 48;
+      cornerFontSize = 13;
+    }
+
+    final cellSize = cornerWidth;
 
     return Padding(
       padding: const EdgeInsets.all(6),
@@ -80,18 +99,18 @@ class BettingGridState extends State<BettingGrid> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: 56,
-                  height: 42,
+                  width: cornerWidth,
+                  height: cornerHeight,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Color(0xFF1D293D),
-                    border: Border.all(color: Color(0xFF45556C)),
+                    color: const Color(0xFF1D293D),
+                    border: Border.all(color: const Color(0xFF45556C)),
                   ),
                   margin: const EdgeInsets.all(1),
-                  child: const Text(
+                  child: Text(
                     "Ball/Place",
                     style: TextStyle(
-                      fontSize: 10.5,
+                      fontSize: cornerFontSize,
                       fontWeight: FontWeight.bold,
                       color: AppColors.white,
                     ),

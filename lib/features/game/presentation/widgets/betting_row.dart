@@ -3,7 +3,7 @@ import 'package:karera/core/theme/constants/colors_const.dart';
 import 'package:karera/features/game/presentation/widgets/bet_amount.dart';
 import 'package:karera/features/game/presentation/widgets/bet_countdown.dart';
 import 'package:karera/features/game/presentation/widgets/bet_grid_widget.dart';
-import 'package:karera/features/game/presentation/widgets/hover_text.dart';
+import 'package:karera/features/game/presentation/widgets/hover_button.dart';
 
 class BettingRow extends StatelessWidget {
   final GlobalKey<BettingGridState> bettingGridKey;

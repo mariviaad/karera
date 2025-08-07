@@ -15,10 +15,18 @@ class RaceHistoryTable extends StatelessWidget {
     double cellPadding = 6;
     double rowHeight = 45.5;
 
-    if (screenWidth < 1000) {
+    if (screenWidth <= 480) {
+      fontSize = 8.5;
+      cellPadding = 2;
+      rowHeight = 35;
+    } else if (screenWidth <= 1000) {
       fontSize = 10.5;
       cellPadding = 4;
       rowHeight = 35;
+    } else {
+      fontSize = 12.25;
+      cellPadding = 6;
+      rowHeight = 45.5;
     }
 
     final List<String> columnHeaders = [

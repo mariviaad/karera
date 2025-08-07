@@ -18,12 +18,35 @@ class BetCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    double outerWidth;
+    double outerHeight;
+    double fontSizeAmount;
+    double fontSizeChance;
+
+    if (screenWidth <= 450) {
+      outerWidth = 40;
+      outerHeight = 34;
+      fontSizeAmount = 10;
+      fontSizeChance = 8.5;
+    } else if (screenWidth <= 650) {
+      outerWidth = 56;
+      outerHeight = 49;
+      fontSizeAmount = 12.25;
+      fontSizeChance = 10.5;
+    } else {
+      outerWidth = 70;
+      outerHeight = 56;
+      fontSizeAmount = 18;
+      fontSizeChance = 14;
+    }
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        width: 56,
-        height: 49,
+        width: outerWidth,
+        height: outerHeight,
         margin: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           color: isTapped
@@ -36,17 +59,17 @@ class BetCell extends StatelessWidget {
           children: [
             Text(
               "$amount",
-              style: const TextStyle(
-                fontSize: 12.25,
+              style: TextStyle(
+                fontSize: fontSizeAmount,
                 color: Colors.yellow,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               "$chance",
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.red,
-                fontSize: 10.5,
+                fontSize: fontSizeChance,
                 fontWeight: FontWeight.bold,
               ),
             ),
