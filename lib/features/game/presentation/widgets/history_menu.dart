@@ -38,7 +38,7 @@ class HistoryMenuState extends State<HistoryMenu> {
             height: 31.5,
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color: const Color(0xFF2E3D56),
+              color: AppColors.gridBlueGrey,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -98,7 +98,7 @@ class HistoryMenuState extends State<HistoryMenu> {
                   ? 'Last 10 races showing final positions • Latest race highlighted'
                   : 'Your betting history • Yellow numbers = Your bets • Gold cells = Race results',
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Color(0xFF90A1B9), fontSize: 10.5),
+              style: const TextStyle(color: AppColors.textGrey, fontSize: 10.5),
             ),
           ),
         ],
@@ -119,16 +119,16 @@ class HistoryMenuState extends State<HistoryMenu> {
         child: Container(
           height: 25.5,
           decoration: BoxDecoration(
-            color: isSelected ? const Color(0xFF3C4D68) : Colors.transparent,
+            color: isSelected ? AppColors.hoverGrey : Colors.transparent,
             borderRadius: BorderRadius.circular(16),
           ),
           alignment: Alignment.center,
           child: Text(
             title,
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 12.25,
               fontWeight: FontWeight.w600,
-              color: isSelected ? AppColors.ballYellow : Colors.white,
+              color: isSelected ? AppColors.yellow : Colors.white,
             ),
           ),
         ),

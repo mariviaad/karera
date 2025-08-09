@@ -63,9 +63,9 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
           height: containerHeight,
           width: containerWidth,
           decoration: BoxDecoration(
-            color: const Color(0x801E2939),
+            color: AppColors.lowOpBlue,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFF4A5565)),
+            border: Border.all(color: AppColors.borderGrey),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -75,7 +75,7 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
                 width: tapWidth,
                 height: containerHeight,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF364153),
+                  color: AppColors.buttonBlue,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
@@ -93,7 +93,7 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
                     Text(
                       'Tap',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: tapFontSize,
                       ),
@@ -107,7 +107,7 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
                 height: containerHeight,
                 decoration: BoxDecoration(
                   border: const Border.symmetric(
-                    vertical: BorderSide(width: 1, color: Color(0xFF4A5565)),
+                    vertical: BorderSide(width: 1, color: AppColors.borderGrey),
                   ),
                   color: AppColors.gameBackground,
                 ),
@@ -115,7 +115,7 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
                 child: Text(
                   '$denomination',
                   style: TextStyle(
-                    color: Colors.amber,
+                    color: AppColors.yellow,
                     fontSize: amountFontSize,
                     fontWeight: FontWeight.bold,
                   ),
@@ -136,7 +136,7 @@ class _BetAmountWidgetState extends State<BetAmountWidget> {
         minimumSize: const Size(24, 40.5),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        foregroundColor: Colors.white,
+        foregroundColor: AppColors.white,
         textStyle: const TextStyle(
           fontSize: 15.75,
           fontWeight: FontWeight.bold,

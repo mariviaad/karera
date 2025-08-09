@@ -51,8 +51,8 @@ class BallLabel extends StatelessWidget {
       height: outerHeight,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: const Color(0xFF314158),
-        border: Border.all(color: const Color(0xFF45556C)),
+        color: AppColors.gridBlueGrey,
+        border: Border.all(color: AppColors.hoverGrey),
       ),
       margin: const EdgeInsets.all(1),
       child: Container(

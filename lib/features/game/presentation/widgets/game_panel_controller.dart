@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:karera/core/theme/constants/colors_const.dart';
 
 class GamePanelContent extends StatelessWidget {
   const GamePanelContent({super.key});
@@ -8,9 +9,9 @@ class GamePanelContent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 13),
       decoration: BoxDecoration(
-        color: const Color(0xFF1D293D),
+        color: AppColors.darkGrey,
         boxShadow: const [
-          BoxShadow(color: Color(0xFF314158), offset: Offset(0, 10)),
+          BoxShadow(color: AppColors.gridBlueGrey, offset: Offset(0, 10)),
         ],
       ),
       child: Center(
@@ -31,7 +32,7 @@ class GamePanelContent extends StatelessWidget {
           height: 3.75,
           margin: const EdgeInsets.symmetric(horizontal: 1.5),
           decoration: const BoxDecoration(
-            color: Color(0xE699A1AF),
+            color: AppColors.panelGrey,
             shape: BoxShape.circle,
           ),
         );

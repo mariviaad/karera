@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:karera/core/theme/constants/colors_const.dart';
 
 class BetCell extends StatelessWidget {
   final int amount;
@@ -49,10 +50,8 @@ class BetCell extends StatelessWidget {
         height: outerHeight,
         margin: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-          color: isTapped
-              ? const Color.fromRGBO(251, 44, 54, .2)
-              : Colors.black,
-          border: Border.all(color: Colors.red, width: 1),
+          color: isTapped ? AppColors.lowOpRed : AppColors.black,
+          border: Border.all(color: AppColors.borderRed, width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,14 +60,14 @@ class BetCell extends StatelessWidget {
               "$amount",
               style: TextStyle(
                 fontSize: fontSizeAmount,
-                color: Colors.yellow,
+                color: AppColors.yellow,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               "$chance",
               style: TextStyle(
-                color: Colors.red,
+                color: AppColors.ballRed,
                 fontSize: fontSizeChance,
                 fontWeight: FontWeight.bold,
               ),

@@ -56,7 +56,7 @@ class _GamePageViewState extends State<GamePageView> {
               body: const Center(
                 child: Text(
                   "Live Race Stream",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: AppColors.white, fontSize: 20),
                 ),
               ),
             )
@@ -67,7 +67,7 @@ class _GamePageViewState extends State<GamePageView> {
                   child: Center(
                     child: Text(
                       "Live Race Stream",
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style: TextStyle(color: AppColors.white, fontSize: 24),
                     ),
                   ),
                 ),

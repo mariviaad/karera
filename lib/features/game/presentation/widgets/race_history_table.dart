@@ -59,7 +59,7 @@ class RaceHistoryTable extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFF45556C)),
+                  border: Border.all(color: AppColors.hoverGrey),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -71,17 +71,17 @@ class RaceHistoryTable extends StatelessWidget {
                             height: rowHeight,
                             padding: EdgeInsets.all(cellPadding),
                             decoration: const BoxDecoration(
-                              color: Color(0xFF314158),
+                              color: AppColors.gridBlueGrey,
                               border: Border(
-                                right: BorderSide(color: Color(0xFF45556C)),
-                                bottom: BorderSide(color: Color(0xFF45556C)),
+                                right: BorderSide(color: AppColors.hoverGrey),
+                                bottom: BorderSide(color: AppColors.hoverGrey),
                               ),
                             ),
                             child: Center(
                               child: Text(
                                 header,
                                 style: TextStyle(
-                                  color: Color(0xFFCAD5E2),
+                                  color: AppColors.tableHeaderGrey,
                                   fontWeight: FontWeight.bold,
                                   fontSize: fontSize,
                                 ),
@@ -104,7 +104,7 @@ class RaceHistoryTable extends StatelessWidget {
                             : Text(
                                 "Finished",
                                 style: TextStyle(
-                                  color: const Color(0xFF99A1AF),
+                                  color: AppColors.statusGrey,
                                   fontWeight: FontWeight.w700,
                                   fontSize: fontSize,
                                 ),
@@ -147,12 +147,12 @@ class RaceHistoryTable extends StatelessWidget {
                                           border: Border(
                                             right: i != rowValues.length - 1
                                                 ? const BorderSide(
-                                                    color: Color(0xFF45556C),
+                                                    color: AppColors.hoverGrey,
                                                   )
                                                 : BorderSide.none,
                                             bottom: index != results.length - 1
                                                 ? const BorderSide(
-                                                    color: Color(0xFF45556C),
+                                                    color: AppColors.hoverGrey,
                                                   )
                                                 : BorderSide.none,
                                           ),
@@ -189,7 +189,7 @@ class RaceHistoryTable extends StatelessWidget {
         return const Center(
           child: Text(
             "No race history available.",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color:AppColors.white),
           ),
         );
       },

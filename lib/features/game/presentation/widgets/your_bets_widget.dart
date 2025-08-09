@@ -38,14 +38,13 @@ class YourBets extends StatelessWidget {
       margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF162033),
+        color: AppColors.lowOpBackground,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.hoverGrey),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// ---- TEXT HEADER ----
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -71,8 +70,8 @@ class YourBets extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           color: isWin
-                              ? const Color(0x1805DF72)
-                              : const Color(0x18FF6467),
+                              ? AppColors.lowOpGreen
+                              : AppColors.histLowOpRed,
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -80,7 +79,7 @@ class YourBets extends StatelessWidget {
                           style: TextStyle(
                             color: isWin
                                 ? AppColors.textGreen
-                                : const Color(0xFFFF6467),
+                                : AppColors.textRed,
                             fontSize: 10.5,
                             fontWeight: FontWeight.bold,
                           ),
@@ -100,9 +99,11 @@ class YourBets extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${isWin ? '+' : '-'}₱${isWin ? totalWin : totalLost}',
+                        '${isWin ? '+' : ''}₱${isWin ? totalWin : totalLost}',
                         style: TextStyle(
-                          color: isWin ? AppColors.textGreen : Colors.redAccent,
+                          color: isWin
+                              ? AppColors.textGreen
+                              : AppColors.textRed,
                           fontSize: 12.25,
                           fontWeight: FontWeight.bold,
                         ),
@@ -135,13 +136,11 @@ class YourBets extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 6),
-
-          /// ---- TABLE HEADER + GRID ----
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 210, // 7 columns x 30px
+                width: 210,
                 child: Column(
                   children: [
                     Row(
@@ -167,13 +166,12 @@ class YourBets extends StatelessWidget {
 
                         return TableRow(
                           children: [
-                            /// BALL LABEL
                             Container(
                               width: 28,
                               height: 28,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: const Color(0xFF314158),
+                                color: AppColors.gridBlueGrey,
                                 border: Border.all(color: AppColors.hoverGrey),
                               ),
                               margin: const EdgeInsets.all(1),
@@ -195,8 +193,6 @@ class YourBets extends StatelessWidget {
                                 ),
                               ),
                             ),
-
-                            /// BET CELLS
                             for (int col = 0; col < 6; col++)
                               _BetCell(
                                 amount: betGrid[rowIndex][col],
@@ -217,7 +213,6 @@ class YourBets extends StatelessWidget {
   }
 }
 
-/// ---- INLINE TABLE HEADER CELL ----
 class _TableHeader extends StatelessWidget {
   final String label;
 
@@ -251,7 +246,6 @@ class _TableHeader extends StatelessWidget {
   }
 }
 
-/// ---- INLINE GRID CELL ----
 class _BetCell extends StatelessWidget {
   final int? amount;
   final bool? isWinningResult;
@@ -263,16 +257,16 @@ class _BetCell extends StatelessWidget {
     final bool isBetPlaced = amount != null;
 
     final Color backgroundColor = isWinningResult == true
-        ? const Color(0x66FE9A00)
+        ? AppColors.bgLowOpAmber
         : isBetPlaced
-        ? const Color(0x33FB2C36)
-        : const Color(0x33000000);
+        ? AppColors.lowOpRed
+        : AppColors.lowOpBlack;
 
     final Color borderColor = isWinningResult == true
-        ? const Color(0xFFFFB900)
+        ? AppColors.amber
         : isBetPlaced
-        ? const Color(0xFFFB2C36)
-        : const Color(0xFF45556C);
+        ? AppColors.ballRed
+        : AppColors.hoverGrey;
 
     return Container(
       width: 28,

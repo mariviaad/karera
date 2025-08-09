@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:karera/core/theme/constants/colors_const.dart';
 
 class BetCountdown extends StatefulWidget {
   final VoidCallback onCountdownFinish;
@@ -60,11 +61,8 @@ class _BetCountdownState extends State<BetCountdown> {
       height: shapeHeight,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: const Color.fromRGBO(231, 0, 11, 1),
-        border: Border.all(
-          color: const Color.fromRGBO(251, 44, 54, 1),
-          width: 2,
-        ),
+        color: AppColors.borderRed,
+        border: Border.all(color: AppColors.ballRed, width: 2),
       ),
       child: Center(
         child: Text(
@@ -72,7 +70,7 @@ class _BetCountdownState extends State<BetCountdown> {
           style: TextStyle(
             fontSize: secondsFontSize,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: AppColors.white,
           ),
         ),
       ),

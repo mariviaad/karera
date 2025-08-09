@@ -68,7 +68,7 @@ class StatusText extends StatelessWidget {
           ? EdgeInsets.symmetric(vertical: 2, horizontal: 4)
           : EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
-        color: const Color(0x1805DF72),
+        color: AppColors.lowOpGreen,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(

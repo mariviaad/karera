@@ -22,8 +22,8 @@ class BalanceWidget extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: screenwidth <= 750
-          ? EdgeInsets.symmetric(vertical: 4, horizontal: 6)
+      padding: screenwidth <= 800
+          ? EdgeInsets.symmetric(vertical: 10, horizontal: 8)
           : EdgeInsets.symmetric(vertical: 12, horizontal: 10),
       decoration: BoxDecoration(
         color: AppColors.buttonBlueGrey,

@@ -36,7 +36,7 @@ class BetSlidingPanelState extends State<BetSlidingPanel> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: width <= 1000
+            padding: width <= 800
                 ? EdgeInsets.symmetric(horizontal: width * 0.025, vertical: 14)
                 : EdgeInsets.all(16),
             child: const BalanceWidget(),
@@ -44,8 +44,8 @@ class BetSlidingPanelState extends State<BetSlidingPanel> {
           Expanded(
             child: ScrollbarTheme(
               data: ScrollbarThemeData(
-                thumbColor: WidgetStateProperty.all(Color(0xFF9F9F9F)),
-                trackColor: WidgetStateProperty.all(Color(0xFF2C2C2C)),
+                thumbColor: WidgetStateProperty.all(AppColors.thumbGrey),
+                trackColor: WidgetStateProperty.all(AppColors.trackBlack),
                 trackBorderColor: WidgetStateProperty.all(Colors.transparent),
                 interactive: true,
                 radius: const Radius.circular(8),
@@ -71,7 +71,7 @@ class BetSlidingPanelState extends State<BetSlidingPanel> {
                           child: Text(
                             "Tap on a cell to bet (Min: ₱5)",
                             style: TextStyle(
-                              color: const Color(0xCCFFFFFF),
+                              color: AppColors.textWhite,
                               fontSize: 10.5,
                             ),
                           ),

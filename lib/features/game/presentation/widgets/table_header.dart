@@ -43,8 +43,8 @@ class TableHeader extends StatelessWidget {
       height: containerHeight,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Color(0xFF314158),
-        border: Border.all(color: Color(0xFF45556C)),
+        color: AppColors.gridBlueGrey,
+        border: Border.all(color: AppColors.hoverGrey),
       ),
       margin: const EdgeInsets.all(1),
       child: Column(

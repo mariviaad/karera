@@ -103,8 +103,8 @@ class BettingGridState extends State<BettingGrid> {
                   height: cornerHeight,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1D293D),
-                    border: Border.all(color: const Color(0xFF45556C)),
+                    color: AppColors.darkGrey,
+                    border: Border.all(color: AppColors.hoverGrey),
                   ),
                   margin: const EdgeInsets.all(1),
                   child: Text(
